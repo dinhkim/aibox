@@ -85,7 +85,6 @@ Options:
 
 Environment Variables:
   AIBOX_DEFAULT_TOOL    Default tool to run if none specified (default: $DEFAULT_TOOL)
-  AIBOX_IMAGE          Default Docker image to use
 
 Examples:
   aibox opencode
@@ -224,7 +223,7 @@ main() {
     workdir="$(pwd)"
   fi
 
-if [[ ! -d "$workdir" ]]; then
+  if [[ ! -d "$workdir" ]]; then
     echo "Error: Workdir does not exist: $workdir" >&2
     exit 1
   fi

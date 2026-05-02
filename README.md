@@ -85,7 +85,6 @@ You can configure defaults in a `.aiboxrc` file in your home directory or projec
 ```bash
 # ~/.aiboxrc
 AIBOX_DEFAULT_TOOL=opencode
-AIBOX_IMAGE=aibox:latest
 ```
 
 Environment variables (e.g. API keys) can be passed through with `-e`:
