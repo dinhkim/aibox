@@ -1,20 +1,20 @@
-# aibox 📦
+# cbox 📦
 
-A wrapper script that launches AI coding assistants (opencode, kilocode, pi) inside a container for a safer, isolated environment.
+A Rust cli that launches any tools inside a container for a safer, isolated environment.
 
 ---
 
-## Why aibox?
+## Why cbox?
 
-AI coding tools are powerful — but they can read files, run commands, and make changes outside your project. `aibox` sandboxes them inside container so you get the productivity benefits without the risk of unintended side effects on your host system.
+AI coding tools are powerful — but they can read files, run commands, and make changes outside your project. `cbox` sandboxes them inside container so you get the productivity benefits without the risk of unintended side effects on your host system.
 
 ---
 
 ## Features
 
-- 🐳 Runs AI coding tools inside a container
+- 🐳 Runs any tools inside a container
 - 🔒 Isolates tool execution from your host environment
-- 🛠️ Supports **opencode**, **kilocode**, and **pi**
+- 🛠️ Supports AI coding tools: **opencode**, **kilocode**, and **pi**
 - 📁 Mounts your project directory into the container automatically
 - ⚡ Simple drop-in replacement for running tools directly
 
@@ -22,21 +22,13 @@ AI coding tools are powerful — but they can read files, run commands, and make
 
 ## Requirements
 
-- Any container engine, e.g. docker, apple container
-- Bash (Linux / macOS / WSL)
+- A supported container engine: docker, apple container
 
 ---
 
 ## Installation
 
-```bash
-git clone https://github.com/yourusername/aibox.git
-cd aibox
-chmod +x aibox.sh
-
-# Optionally, add to your PATH
-ln -s "$(pwd)/aibox.sh" /usr/local/bin/aibox
-```
+TBD
 
 ---
 
@@ -44,27 +36,27 @@ ln -s "$(pwd)/aibox.sh" /usr/local/bin/aibox
 
 ```bash
 # Run opencode in a container
-aibox opencode
+cbx opencode
 
 # Run kilocode in a container
-aibox kilocode
+cbx kilocode
 
 # Run pi in a container
-aibox pi
+cbx pi
 ```
 
-By default, aibox mounts the current working directory into the container as the project workspace.
+By default, cbox mounts the current working directory into the container as the project workspace.
 
 ```bash
 # Run from your project directory
 cd ~/my-project
-aibox opencode
+cbx opencode
 ```
 
 ### Options
 
 ```
-Usage: aibox [OPTIONS] <tool>
+Usage: cbx [OPTIONS] <tool>
 
 Arguments:
   tool          AI coding tool to run: opencode | kilocode | pi
@@ -80,24 +72,24 @@ Options:
 
 ## Configuration
 
-You can configure defaults in a `.aiboxrc` file in your home directory or project root:
+You can configure defaults in a `.cbxrc` file in your home directory or project root:
 
 ```bash
 # ~/.aiboxrc
-AIBOX_DEFAULT_TOOL=opencode
+CBX_DEFAULT_TOOL=opencode
 ```
 
 Environment variables (e.g. API keys) can be passed through with `-e`:
 
 ```bash
-aibox -e OPENAI_API_KEY=$OPENAI_API_KEY opencode
+cbx -e OPENAI_API_KEY=$OPENAI_API_KEY opencode
 ```
 
 ---
 
 ## How It Works
 
-`aibox` wraps a `docker run` command that:
+`cbox` wraps a `docker run` command that:
 
 1. Pulls (or builds) a pre-configured container image with the AI tools installed
 2. Mounts your current project directory to `/workspace` inside the container
