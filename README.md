@@ -36,13 +36,13 @@ TBD
 
 ```bash
 # Run opencode in a container
-cbx opencode
+cbox opencode
 
 # Run kilocode in a container
-cbx kilocode
+cbox kilocode
 
 # Run pi in a container
-cbx pi
+cbox pi
 ```
 
 By default, cbox mounts the current working directory into the container as the project workspace.
@@ -50,13 +50,13 @@ By default, cbox mounts the current working directory into the container as the 
 ```bash
 # Run from your project directory
 cd ~/my-project
-cbx opencode
+cbox opencode
 ```
 
 ### Options
 
 ```
-Usage: cbx [OPTIONS] <tool>
+Usage: cbox [OPTIONS] <tool>
 
 Arguments:
   tool          AI coding tool to run: opencode | kilocode | pi
@@ -72,11 +72,11 @@ Options:
 
 ## Configuration
 
-You can configure defaults in a `.cbxrc` file in your home directory or project root:
+You can configure defaults in a `.cboxrc` file in your home directory or project root:
 
 ```bash
-# ~/.aiboxrc
-CBX_DEFAULT_TOOL=opencode
+# ~/.cboxrc
+CBOX_DEFAULT_TOOL=opencode
 ```
 
 Environment variables (e.g. API keys) can be passed through with `-e`:

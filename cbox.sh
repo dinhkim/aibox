@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-AIBOX_SCRIPT_VERSION="1.0.0"
+CBOX_SCRIPT_VERSION="1.0.0"
 DEFAULT_TOOL="opencode"
 
 TOOL_NAMES="opencode|kilocode|pi"
@@ -15,12 +15,12 @@ HELP_FLAG=false
 load_config() {
   local config_file=""
 
-  if [[ -f "$HOME/.aiboxrc" ]]; then
-    source "$HOME/.aiboxrc"
+  if [[ -f "$HOME/.cboxrc" ]]; then
+    source "$HOME/.cboxrc"
   fi
 
-  if [[ -f ".aiboxrc" ]]; then
-    source ".aiboxrc"
+  if [[ -f ".cboxrc" ]]; then
+    source ".cboxrc"
   fi
 }
 
@@ -61,7 +61,7 @@ parse_arguments() {
 
   if [[ -z "${TOOL_NAME:-}" ]]; then
     load_config
-    TOOL_NAME="${AIBOX_DEFAULT_TOOL:-}"
+    TOOL_NAME="${CBOX_DEFAULT_TOOL:-}"
   fi
 
   if [[ -z "$TOOL_NAME" ]]; then
@@ -72,7 +72,7 @@ parse_arguments() {
 
 show_usage() {
   cat << EOF
-Usage: aibox [OPTIONS] <tool>
+Usage: cbox [OPTIONS] <tool>
 
 Arguments:
   tool          AI coding tool to run: $TOOL_NAMES
@@ -84,14 +84,14 @@ Options:
   -h, --help            Show this help message
 
 Environment Variables:
-  AIBOX_DEFAULT_TOOL    Default tool to run if none specified (default: $DEFAULT_TOOL)
+  CBOX_DEFAULT_TOOL    Default tool to run if none specified (default: $DEFAULT_TOOL)
 
 Examples:
-  aibox opencode
-  aibox kilocode
-  aibox pi
-  aibox -w ~/my-project opencode
-  aibox -e OPENAI_API_KEY=\$OPENAI_API_KEY opencode
+  cbox opencode
+  cbox kilocode
+  cbox pi
+  cbox -w ~/my-project opencode
+  cbox -e OPENAI_API_KEY=\$OPENAI_API_KEY opencode
 
 EOF
 }
