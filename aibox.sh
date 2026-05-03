@@ -9,7 +9,7 @@ TOOL_NAMES="opencode|kilocode|pi"
 
 WORKDIR_FLAG=""
 IMAGE_FLAG=""
-ENV_FLAGS=()
+ENV_FLAGS=("-e" "AI_BOX=true")
 HELP_FLAG=false
 
 load_config() {
@@ -36,7 +36,7 @@ parse_arguments() {
         shift 2
         ;;
       -e|--env)
-        ENV_FLAGS+=("$2")
+        ENV_FLAGS+=("-e" "$2")
         shift 2
         ;;
       -h|--help)
@@ -168,15 +168,9 @@ execute_opencode() {
   container run -it --rm \
     -v "$workdir:/workspace" \
     -w /workspace \
+    "${ENV_FLAGS[@]}" \
     "$image" \
     "$@"
-
-  # docker run -it --rm \
-  #   -v "$workdir:/workspace" \
-  #   -w /workspace \
-  #   "${ENV_FLAGS[@]}" \
-  #   "$image" \
-  #   "$@"
 }
 
 execute_kilocode() {
@@ -189,6 +183,7 @@ execute_kilocode() {
   container run -it --rm \
     -v "$workdir:/workspace" \
     -w /workspace \
+    "${ENV_FLAGS[@]}" \
     "$image" \
     "$@"
 }
@@ -203,7 +198,11 @@ execute_pi() {
   container run -it --rm \
     -v "$workdir:/workspace" \
     -v "$HOME/.pi/agent/models.json:/home/piuser/.pi/agent/models.json" \
+    -v "$HOME/.pi/agent/auth.json:/home/piuser/.pi/agent/auth.json" \
+    -v "$HOME/.local/share/gopass:/home/piuser/.local/share/gopass" \
+    -v "$HOME/.config/gopass/age:/home/piuser/.config/gopass/age" \
     -w /workspace \
+    "${ENV_FLAGS[@]}" \
     "$image" \
     "$@"
 }
